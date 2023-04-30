@@ -242,7 +242,7 @@ if __name__ == "__main__":
     for i in user_list:
         print(f"---------用户：{encryption(i)} 开始打卡------------")
         weekday = datetime.datetime.now().weekday() + 1
-        print(f"今天是星期 {weekday}")
+        print(f"今天是星期 {weekday}，{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))}")
         uses.get_JWSESSION(i, password)
         # 星期天才打卡，其他时间更新JWSESSION
         if weekday == 7:
