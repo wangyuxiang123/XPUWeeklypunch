@@ -233,7 +233,6 @@ if __name__ == "__main__":
     info = os.environ.get('INFO', '').split('\n')
     latitude = info[0]
     longitude = info[1]
-
     password = 123456789
 
     uses = Do()
@@ -243,6 +242,7 @@ if __name__ == "__main__":
 
         print(f"---------用户：{encryption(user_number)}:{user_name}开始打卡------------")
         print(f"现在是{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))}")
+
         uses.get_JWSESSION(user_number, password)
         uses.punch()
 
