@@ -16,11 +16,8 @@ headers = {
     "Connection": "keep-alive",
     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.34(0x18002230) NetType/WIFI Language/zh_CN",
     "Content-Type": "application/x-www-form-urlencoded",
-    # "Content-Length": "2",
-    # "Host": "student.wozaixiaoyuan.com",
     "Accept-Language": "en-us,en",
-    # "host": "student.wozaixiaoyuan.com",
-    "Accept": "application/json, text/plain, */*"
+    "Accept": "application/json, text/plain, */*",
 }
 
 filename = "jwsession"
@@ -48,7 +45,8 @@ def write_csv(filename, data_list):
 def login(user_name, pass_word):
     print("使用登录模式获取JWSESSION")
     # 登陆接口
-    loginUrl = "https://student.wozaixiaoyuan.com/basicinfo/mobile/login/username"
+    loginUrl = "https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username"
+    # loginUrl = "https://student.wozaixiaoyuan.com/basicinfo/mobile/login/username"
     url = loginUrl + "?username=" + str(user_name) + "&password=" + str(pass_word)
     session = requests.session()
 
@@ -72,7 +70,7 @@ def login(user_name, pass_word):
 def reset(user_name, pass_word):
     jwsession_info = pd.read_csv(f"{filename}.csv")
     jwsession = jwsession_info[jwsession_info["username"] == encryption(user_name)]["JWSESSION"].values[0]
-
+    print(jwsession)
     headers_reset = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Encoding": "gzip, deflate, br",
@@ -242,12 +240,10 @@ if __name__ == "__main__":
     for i in user_list:
         user_number = i.split(",")[0]
         user_name = i.split(",")[1]
+
         print(f"---------用户：{encryption(user_number)}:{user_name}开始打卡------------")
-        # weekday = datetime.datetime.now().weekday() + 1
         print(f"现在是{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))}")
-        uses.get_JWSESSION(i, password)
-        # 星期天才打卡，其他时间更新JWSESSION
-        # if weekday == 7:
+        uses.get_JWSESSION(user_number, password)
         uses.punch()
 
         time.sleep(1)
