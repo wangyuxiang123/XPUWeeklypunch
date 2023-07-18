@@ -129,9 +129,10 @@ def get_list(h):
     url = "https://gw.wozaixiaoyuan.com/sign/mobile/receive/getMySignLogs?page=1&size=1"
     res = requests.get(url, headers=h)
     res_text = res.json()["data"][0]
-    print("标题：", res_text)
+    print("标题：", res_text["signContext"])
 
     area_json = res_text["areaList"][0]
+
     sign_id = res_text["signId"]
     item_id = res_text["id"]
     school_id = res_text["schoolId"]
