@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b52a7d20-542d-4ca2-9983-2d47df5559e8" name="Changes" comment="初始化">
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -55,7 +56,7 @@
       <recent name="C:\Users\wyx\Desktop\XPUWeeklypunch" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.test">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="XPUWeeklypunch" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -102,8 +103,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -124,6 +125,7 @@
       <workItem from="1682310221970" duration="1145000" />
       <workItem from="1682870344586" duration="620000" />
       <workItem from="1682870975284" duration="51000" />
+      <workItem from="1698904770177" duration="448000" />
     </task>
     <task id="LOCAL-00001" summary="初始化">
       <created>1682309753971</created>
@@ -162,7 +164,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="初始化" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/XPUWeeklypunch$main.coverage" NAME="main Coverage Results" MODIFIED="1682870543318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/XPUWeeklypunch$test.coverage" NAME="test Coverage Results" MODIFIED="1682309231857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XPUWeeklypunch$test.coverage" NAME="test Coverage Results" MODIFIED="1698905211990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/XPUWeeklypunch$main.coverage" NAME="main Coverage Results" MODIFIED="1698905109874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

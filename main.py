@@ -9,6 +9,7 @@ import datetime
 import time
 from urllib.parse import urlencode
 import os
+import re
 
 # 请求头
 headers = {
@@ -58,7 +59,12 @@ def login(user_name, pass_word):
 
     if res["code"] == 0:
         # 登录成功获取JWSESSION
-        new_jwsession = response.headers['JWSESSION']
+        # 定义正则表达式
+        pattern = r'(?<=JWSESSION=).+?(?=;)'
+        # 使用正则表达式匹配两个特定字符之间的字符
+        new_jwsession = re.findall(pattern, response.headers["Set-Cookie"])[0]
+
+        # new_jwsession = response.headers['JWSESSION']
         print("登录成功，自动保存，new_jwsession-->", new_jwsession)
 
         return new_jwsession
