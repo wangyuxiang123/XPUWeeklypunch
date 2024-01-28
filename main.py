@@ -1,15 +1,11 @@
 import csv
-import hashlib
 import json
-import sys
+import os
+import re
+import time
 
 import pandas as pd
 import requests
-import datetime
-import time
-from urllib.parse import urlencode
-import os
-import re
 
 # 请求头
 headers = {
@@ -55,6 +51,7 @@ def login(user_name, pass_word):
     body = "{}"
 
     response = session.post(url=url, data=body, headers=headers)
+
     res = json.loads(response.text)
 
     if res["code"] == 0:
@@ -76,7 +73,7 @@ def login(user_name, pass_word):
 def reset(user_name, pass_word):
     jwsession_info = pd.read_csv(f"{filename}.csv")
     jwsession = jwsession_info[jwsession_info["username"] == encryption(user_name)]["JWSESSION"].values[0]
-    print(jwsession)
+    print("jwsession:", jwsession)
     headers_reset = {
         "Accept": "application/json, text/plain, */*",
         "Accept-Encoding": "gzip, deflate, br",
@@ -93,10 +90,20 @@ def reset(user_name, pass_word):
     res = requests.post(url=reset_url, headers=headers_reset)
 
     if res.json()["code"] == 0:
-        new_jwsession = res.headers["JWSESSION"]
+        # new_jwsession = res.headers["JWSESSION"]
+        # print("密码修改成功，成功获取JWSESSION，自动保存，new_jwsession-->", new_jwsession)
+        #
+        # return new_jwsession
+        # 登录成功获取JWSESSION
+        # 定义正则表达式
+        pattern = r'(?<=JWSESSION=).+?(?=;)'
+        # 使用正则表达式匹配两个特定字符之间的字符
+        new_jwsession = re.findall(pattern, res.headers["Set-Cookie"])[0]
+
         print("密码修改成功，成功获取JWSESSION，自动保存，new_jwsession-->", new_jwsession)
 
         return new_jwsession
+
     else:
         print("修改密码失败，结果-->", res)
         return False
@@ -144,6 +151,14 @@ def get_list(h):
     school_id = res_text["schoolId"]
 
     return area_json, sign_id, item_id, school_id
+
+
+def load_to_file(file_path):
+    # 打开文件并读取内容
+    with open(file_path, 'r') as file:
+        # 使用readlines()方法读取每一行，并去除末尾的换行符
+        content_list = [line.strip() for line in file.readlines()]
+    return content_list
 
 
 class Do:
@@ -242,6 +257,7 @@ if __name__ == "__main__":
     latitude = info[0]
     longitude = info[1]
     password = 123456789
+    # user_list = load_to_file("打卡名单.txt")
 
     uses = Do()
     for i in user_list:
