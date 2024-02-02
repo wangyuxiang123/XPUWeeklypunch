@@ -3,9 +3,12 @@ import json
 import os
 import re
 import time
+from base64 import b64encode
 
 import pandas as pd
 import requests
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
 
 # 请求头
 headers = {
@@ -26,6 +29,14 @@ def encryption(user_name):
     return user_id
 
 
+def encrypt(password, username):
+    key = (str(username) + "0000000000000000")[:16].encode('utf-8')
+    cipher = AES.new(key, AES.MODE_ECB)
+    padded_text = pad(str(password).encode('utf-8'), AES.block_size)
+    encrypted_text = cipher.encrypt(padded_text)
+    return b64encode(encrypted_text).decode('utf-8')
+
+
 def write_csv(filename, data_list):
     keys = data_list[0].keys()
     print(f"开始写入{filename}")
@@ -44,7 +55,10 @@ def login(user_name, pass_word):
     # 登陆接口
     loginUrl = "https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username"
     # loginUrl = "https://student.wozaixiaoyuan.com/basicinfo/mobile/login/username"
-    url = loginUrl + "?username=" + str(user_name) + "&password=" + str(pass_word)
+
+    pass_word_encrypt = encrypt(password=pass_word, username=user_name)
+
+    url = loginUrl + "?username=" + str(user_name) + "&password=" + str(pass_word_encrypt)
     session = requests.session()
 
     # 请求体（必须有） body = "{}"
