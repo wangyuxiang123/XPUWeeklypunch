@@ -58,7 +58,7 @@ def login(user_name, pass_word):
 
     pass_word_encrypt = encrypt(password=pass_word, username=user_name)
 
-    url = loginUrl + "?username=" + str(user_name) + "&password=" + str(pass_word_encrypt)
+    url = loginUrl + "?username=" + str(user_name) + "&password=" + str(pass_word_encrypt) + "&schoolId=253"
     session = requests.session()
 
     # 请求体（必须有） body = "{}"
