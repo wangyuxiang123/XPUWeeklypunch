@@ -124,7 +124,8 @@ def reset(user_name, pass_word):
 
 
 def get_location(latitude, longitude):
-    url = "https://apis.map.qq.com/ws/geocoder/v1/?key=A3YBZ-NC5RU-MFYVV-BOHND-RO3OT-ABFCR&location={},{}".format(
+    # old_api = A3YBZ-NC5RU-MFYVV-BOHND-RO3OT-ABFCR
+    url = "https://apis.map.qq.com/ws/geocoder/v1/?key=2DUBZ-HUMLU-3GAVO-GQJPZ-HMQDV-O4F5E&location={},{}".format(
         latitude, longitude)
     res = requests.get(url)
     resList = res.json()
@@ -266,12 +267,20 @@ class Do:
 
 
 if __name__ == "__main__":
-    user_list = os.environ.get('USER', '').split('\n')
-    info = os.environ.get('INFO', '').split('\n')
-    latitude = info[0]
-    longitude = info[1]
+    # user_list = os.environ.get('USER', '').split('\n')
+    # info = os.environ.get('INFO', '').split('\n')
+    # latitude = info[0]
+    # longitude = info[1]
+    # password = 123456789
+
+
+    latitude = 34.36
+    longitude = 109.19
+    user_list = ["18013046315,hc",
+                 "13559180980,wzh",
+                 "15538152327,jkx",
+                 "15802990960,lm"]
     password = 123456789
-    # user_list = load_to_file("打卡名单.txt")
 
     uses = Do()
     for i in user_list:
