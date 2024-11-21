@@ -270,13 +270,10 @@ class Do:
 
 
 if __name__ == "__main__":
-    # user_list = os.environ.get('USER', '').split('\n')
-    # info = os.environ.get('INFO', '').split('\n')
-    # latitude = info[0]
-    # longitude = info[1]
-    latitude = 34.36
-    longitude = 109.19
-    user_list = ["18013046315,hc"]
+    user_list = os.environ.get('USER', '').split('\n')
+    info = os.environ.get('INFO', '').split('\n')
+    latitude = info[0]
+    longitude = info[1]
     password = 123456789
 
     uses = Do()
