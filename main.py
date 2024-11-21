@@ -155,9 +155,10 @@ def get_location(latitude, longitude):
 
 def get_list(h):
     url = "https://gw.wozaixiaoyuan.com/sign/mobile/receive/getMySignLogs?page=1&size=1"
-    res = requests.get(url, headers=h)
-    print(res)
-    print(res.text.encode("utf8"))
+    res = requests.get(url)
+    print(res.content)
+    print(res.headers)
+    print(res.text)
     res_text = res.json()["data"][0]
     print("标题：", res_text["signContext"])
 
@@ -269,10 +270,13 @@ class Do:
 
 
 if __name__ == "__main__":
-    user_list = os.environ.get('USER', '').split('\n')
-    info = os.environ.get('INFO', '').split('\n')
-    latitude = info[0]
-    longitude = info[1]
+    # user_list = os.environ.get('USER', '').split('\n')
+    # info = os.environ.get('INFO', '').split('\n')
+    # latitude = info[0]
+    # longitude = info[1]
+    latitude = 34.36
+    longitude = 109.19
+    user_list = ["18013046315,hc"]
     password = 123456789
 
     uses = Do()
