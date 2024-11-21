@@ -156,6 +156,8 @@ def get_location(latitude, longitude):
 def get_list(h):
     url = "https://gw.wozaixiaoyuan.com/sign/mobile/receive/getMySignLogs?page=1&size=1"
     res = requests.get(url, headers=h)
+    print(res)
+    print(res.text)
     res_text = res.json()["data"][0]
     print("标题：", res_text["signContext"])
 
