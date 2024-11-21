@@ -12,7 +12,7 @@ from Crypto.Util.Padding import pad
 
 # 请求头
 headers = {
-    "Accept-Encoding": "gzip, deflate, br",
+    # "Accept-Encoding": "gzip, deflate, br",
     "Connection": "keep-alive",
     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.34(0x18002230) NetType/WIFI Language/zh_CN",
     "Content-Type": "application/x-www-form-urlencoded",
