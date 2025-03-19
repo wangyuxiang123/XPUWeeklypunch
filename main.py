@@ -99,13 +99,13 @@ class Do:
         # area_json = res_text["areaList"][0]
         id = res_text["id"]
         name = res_text["name"]
-        latitude = res_text["latitude"]
-        longitude = res_text["longitude"]
+        # latitude = res_text["latitude"]
+        # longitude = res_text["longitude"]
         sign_id = res_text["signId"]
         item_id = res_text["id"]
         school_id = res_text["schoolId"]
 
-        return latitude, longitude, id, name, sign_id, item_id, school_id
+        return id, name, sign_id, item_id, school_id
 
     def login(self, user_name, pass_word):
         print("使用登录模式获取JWSESSION")
@@ -152,13 +152,13 @@ class Do:
         location_list = self.get_location()
 
         # 获取签到列表信息
-        latitude, longitude, id, name, sign_id, item_id, school_id = self.get_list()
+        id, name, sign_id, item_id, school_id = self.get_list()
 
         areaJSON = {
             "type": 0,
             "circle": {
-                "latitude": latitude,
-                "longitude": longitude,
+                "latitude": self.latitude,
+                "longitude": self.longitude,
                 # "radius": area_json["radius"]
             },
             "id": id,
