@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 import re
@@ -80,19 +81,31 @@ class Do:
 
             return locationList
 
+    def is_weekend(self):
+        # 获取当前日期
+        today = datetime.date.today()
+        # 获取星期几（星期一为0，星期天为6）
+        weekday = today.weekday()
+
+        # 打印结果
+        print("今天是星期" + str(weekday + 1))
+
     def get_list(self):
         url = "https://gw.wozaixiaoyuan.com/sign/mobile/receive/getMySignLogs?page=1&size=1"
         res = requests.get(url, headers=self.headers)
         res_text = res.json()["data"][0]
         print("标题：", res_text["signContext"])
-
-        area_json = res_text["areaList"][0]
-
+        # 先留着，周天看情况
+        # area_json = res_text["areaList"][0]
+        id = res_text["id"]
+        name = res_text["name"]
+        latitude = res_text["latitude"]
+        longitude = res_text["longitude"]
         sign_id = res_text["signId"]
         item_id = res_text["id"]
         school_id = res_text["schoolId"]
 
-        return area_json, sign_id, item_id, school_id
+        return latitude, longitude, id, name, sign_id, item_id, school_id
 
     def login(self, user_name, pass_word):
         print("使用登录模式获取JWSESSION")
@@ -139,17 +152,17 @@ class Do:
         location_list = self.get_location()
 
         # 获取签到列表信息
-        area_json, sign_id, item_id, school_id = self.get_list()
+        latitude, longitude, id, name, sign_id, item_id, school_id = self.get_list()
 
         areaJSON = {
             "type": 0,
             "circle": {
-                "latitude": area_json["latitude"],
-                "longitude": area_json["longitude"],
-                "radius": area_json["radius"]
+                "latitude": latitude,
+                "longitude": longitude,
+                # "radius": area_json["radius"]
             },
-            "id": area_json["id"],
-            "name": area_json["name"]
+            "id": id,
+            "name": name
         }
 
         # 打卡表单构建
@@ -215,6 +228,6 @@ if __name__ == "__main__":
 
             time.sleep(1)
         except Exception as e:
-            print(f"用户：{encryption(user_number)}:{user_name}打卡失败,跳过")
+            print(f"用户：{encryption(user_number)}:{user_name}打卡失败,跳过,错误原因是：+{e}")
 
     print("---------------------end-------------------------")
